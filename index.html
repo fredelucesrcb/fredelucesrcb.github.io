@@ -328,10 +328,6 @@
                 let start_date = $("#start_date").val();
                 let end_date = $("#end_date").val();
 
-
-                alert( start_date)
-                alert(end_date)
-
                 $.ajax(
                 {
                     url:"https://test.coupons.sence1.com/promotions",
@@ -357,7 +353,7 @@
                     })
                     ,
                     success: function(data,status){
-                    alert("Data: " + data + "\nStatus: " + status);
+                    alert("Status: " + status);
                 }
                 }
                 
@@ -400,8 +396,8 @@
                         }
                     },
                     success: function(data,status){
-                    alert("Data: " + data + "\nStatus: " + status);
-                }});
+                        alert("Status: " + status);
+                    }});
             });
 // end edit
 
@@ -417,8 +413,8 @@
                             "promotion_id": promo_id
                     },
                     success: function(data,status){
-                        alert("Data: " + data + "\nStatus: " + status);
-                }});
+                        alert("Status: " + status);
+                    }});
             });
 //end create coupon code
 
@@ -434,8 +430,8 @@ $("#delete_single_promotion").click(function(){
                     //         "promotion_id": promo_id
                     // },
                     success: function(data,status){
-                        alert("Data: " + data + "\nStatus: " + status);
-                }});
+                        alert("Status: " + status);
+                    }});
             });
 //end DELETE promotion
 
@@ -474,7 +470,7 @@ $("#claim_coupon_code_btn").click(function(){
                     }
                     ),
                     success: function(data,status){
-                        alert(data);
+                        alert("Status: " + status);
                         // populateCheckCouponCodeDetails(data);
                 }});
             });
