@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+
+    <!-- Popperjs -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha256-BRqBN7dYgABqtY9Hd4ynE+1slnEw+roEPFzQ7TRRfcg=" crossorigin="anonymous"></script>
+    <!-- Tempus Dominus JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/js/tempus-dominus.min.js" crossorigin="anonymous"></script>
+
+    <!-- Tempus Dominus Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/css/tempus-dominus.min.css" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container border">
+        <h1>
+            Coupons Test
+        </h1>
+
+        <div class="container border p-2">
+            <h2>
+                Creating Coupons
+            </h2>
+    
+            <form>
+                <div class="row g-2">
+                    <div class="col form-floating">
+                        <input type="text" id="promo_name" class="form-control" name="promo_name" placeholder="Promo Name">
+                        <label for="promo_name">Promo Name</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input type="number" id="discount" class="form-control" name="discount" placeholder="Discount">
+                        <label for="discount">Discount</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input type="number" id="min_spend" class="form-control" name="min_spend" placeholder="Minimum Spend">
+                        <label for="min_spend">Minimum Spend</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input type="number" id="max_spend" class="form-control" name="max_spend" placeholder="Maximum Spend">
+                        <label for="max_spend">Maximum Spend</label>
+                    </div>
+                </div>
+    
+<br>
+        
+                <div class="row g-2">
+                    <div class="col form-floating">
+                        <input type="text" id="description" class="form-control" name="description" placeholder="Description">
+                        <label for="description">Description</label>
+                    </div>
+                </div>
+<br>
+    
+                <div class="row g-2">
+                    <div class="col form-floating">
+                        <input type="number" id="category" class="form-control" name="category" placeholder="Category">
+                        <label for="category">Category</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input type="number" id="coupon_type" class="form-control" name="coupon_type" placeholder="Coupon Type">
+                        <label for="coupon_type">Coupon Type</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input type="number" id="coupon_count" class="form-control" name="coupon_count" placeholder="Coupon Count">
+                        <label for="coupon_count">Coupon Count</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input type="text" id="prefix" name="prefix" class="form-control" placeholder=" Promo Prefix">
+    
+                        <label for="prefix">Promo Prefix</label><br>
+                    </div>
+                </div>
+<br>
+                <div>
+                    <label for="start_date">Start Date</label>
+
+                    <input type="date" id="start_date" name="start_date">
+
+                    <label for="end_date">End Date</label>
+
+                    <input type="date" id="end_date" name="end_date">
+                </div>
+                
+<br>
+                        
+                <button type="button" class="btn btn-primary" id="submit">Create Promotion</button>
+            </form> 
+
+        </div>
+        
+<br>
+        <div class="container border p-2">
+            <h2>
+                Getting Promotions Data
+            </h2>
+    
+            <form>
+                <button type="button" class="btn btn-primary" value="Get Promotions" id="get_promos">Get All Promotions</button>
+            </form>
+<br>
+            <div id="promotions_data_container">
+                <div class="accordion" id="promotions_data">
+                </div>
+            </div>
+        </div>
+
+<br>
+
+    <div class="container border p-2">
+
+        <h2>
+            Editing
+        </h2>
+
+
+        <form>
+            <div class="row g-2">
+                <div class="col form-floating">
+                    <input type="number" id="id_edit" class="form-control" name="id_edit" placeholder="ID">
+                    <label for="id_edit">ID</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="text" id="promo_name_edit" class="form-control" name="promo_name_edit" placeholder="Promo Name">
+                    <label for="promo_name_edit">Promo Name</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="number" id="discount_edit" class="form-control" name="discount_edit" placeholder="Discount">
+                    <label for="discount_edit">Discount</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="number" id="min_spend_edit" class="form-control" name="min_spend_edit" placeholder="Minimum Spend">
+                    <label for="min_spend_edit">Minimum Spend</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="number" id="max_spend_edit" class="form-control" name="max_spend_edit" placeholder="Maximum Spend">
+                    <label for="max_spend_edit">Maximum Spend</label>
+                </div>
+            </div>
+
+<br>
+    
+            <div class="row g-2">
+                <div class="col form-floating">
+                    <input type="text" id="description_edit" class="form-control" name="description_edit" placeholder="Description">
+                    <label for="description_edit">Description</label>
+                </div>
+            </div>
+
+<br>
+
+            <div class="row g-2">
+                <div class="col form-floating">
+                    <input type="number" id="category_edit" class="form-control" name="category_edit" placeholder="Category">
+                    <label for="category_edit">Category</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="number" id="coupon_type_edit" class="form-control" name="coupon_type_edit" placeholder="Coupon Type">
+                    <label for="coupon_type_edit">Coupon Type</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="text" id="prefix_edit" name="prefix_edit" class="form-control" placeholder="Promo Prefix">
+
+                    <label for="prefix_edit">Promo Prefix</label><br>
+                </div>
+            </div>
+
+            <div>
+                <label for="start_date_edit">Start Date</label>
+
+                <input type="date" id="start_date_edit" name="start_date_edit">
+
+                <label for="end_date_edit">End Date</label>
+
+                <input type="date" id="end_date_edit" name="end_date_edit">
+            </div>
+<br>
+            <button type="button" class="btn btn-success" id="submit_edit">Edit Promotion</button>
+        </form>
+    </div>
+
+<br>
+
+    <div class="container border p-2">
+
+        <h2>
+            Getting a Single Promotion
+        </h2>
+
+        <div class="mb-3">
+            <label for="promotion_id" class="form-label">Promotion ID</label>
+            <input type="number" class="form-control" id="promotion_id" name="promotion_id">
+        </div>
+        <button type="submit" id="submit_single_promotion" class="btn btn-danger">Get Single Promotion</button>
+
+        <div>
+            <h3 id="promotion_name"></h3>
+            <h3 id="promo_id"></h3>
+        </div>
+
+        <div id="single_promotion_coupons_data_container">
+            <div class="accordion" id="single_promotion_coupon_data">
+            </div>
+        </div>
+    </div>
+
+<br>
+
+    <div class="container border p-2">
+
+        <h2>
+            Deleting a Single Promotion
+        </h2>
+
+        <div class="mb-3">
+            <label for="promotion_id_delete" class="form-label">Promotion ID</label>
+            <input type="number" class="form-control" id="promotion_id_delete" name="promotion_id_delete">
+        </div>
+        <button type="submit" id="delete_single_promotion" class="btn btn-danger">Delete Promotion</button>
+
+    </div>
+<br>
+
+        <div class="container border p-2">
+            <h2>
+                Creating Promo Code
+            </h2>
+
+            <div class="mb-3">
+                <label for="promotion_id_create_code" class="form-label">Promotion ID</label>
+                <input type="number" class="form-control" id="promotion_id_create_code" name="promotion_id_create_code">
+            </div>
+            <button type="submit" id="create_coupon_code_btn" class="btn btn-primary">Create Coupon Code</button>
+    
+            <!-- <form>
+                <label for="promotion_id_create_code">Promotion ID:</label><br>
+                <input type="number" id="promotion_id_create_code" name="promotion_id_create_code">
+            </form>
+
+            <input type="button" value="Create Coupon Code" id="create_coupon_code_btn"> -->
+        </div>
+<br>    
+        <div class="container border p-2">
+            <h2>
+                Checking for validity of coupon_code
+            </h2>
+
+            <div class="row g-2">
+                <div class="col form-floating">
+                    <input type="text" id="coupon_code_check_coupon_code" class="form-control" name="coupon_code_check_coupon_code" placeholder="Coupon Code">
+                    <label for="coupon_code_check_coupon_code">Coupon Code</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="number" id="spend_price_check_coupon_code" class="form-control" name="spend_price_check_coupon_code" placeholder="Spend Price">
+                    <label for="spend_price_check_coupon_code">Spend Price</label>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-secondary" value="Check Coupon Code" id="check_coupon_code_btn"> Check Coupon Code</button>
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title" id="coupon_code_promo">Promotion</h5>
+                    <div id="promo_details"></div>
+                <h5 class="card-title" id="coupon_code_code">Code</h5>
+                    <div id="coupon_details"></div>
+                </div>
+            </div>
+            </div>
+<br>
+            <div class="container border p-2">
+                <h2>
+                    Claiming coupon_code
+                </h2>
+
+                <div class="row g-2">
+                    <div class="col form-floating">
+                        <input type="text" id="coupon_code_claim_coupon_code" class="form-control" name="coupon_code_claim_coupon_code" placeholder="Coupon Code">
+                        <label for="coupon_code_claim_coupon_code">Coupon Code</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input type="number" id="spend_price_claim_coupon_code" class="form-control" name="spend_price_claim_coupon_code" placeholder="Spend Price">
+                        <label for="spend_price_claim_coupon_code">Spend Price</label>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-danger" value="Claim Coupon Code" id="claim_coupon_code_btn"> Check Coupon Code</button>
+            </div>
+        </div>
+
+
+    </div>
+
+        </body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            var dt = moment().format('YYYY-MM-DD');
+            var dt7 = moment().add(7, 'days').format('YYYY-MM-DD');
+
+            $.ajaxSetup({
+                headers:{
+                    'AUTHORIZATION': "test"
+                }
+            });
+
+// start create_promotions
+            $("#submit").click(function(){
+                let promo_name = $("#promo_name").val();
+                let discount = $("#discount").val();
+                let min_spend = $("#min_spend").val();
+                let max_spend = $("#max_spend").val();
+                let description = $("#description").val();
+                let category = $("#category").val();
+                let coupon_type = $("#coupon_type").val();
+                let coupon_count = $("#coupon_count").val();
+                let prefix = $("#prefix").val();
+                let start_date = $("#start_date").val();
+                let end_date = $("#end_date").val();
+
+
+                alert( start_date)
+                alert(end_date)
+
+                $.ajax(
+                {
+                    url:"https://test.coupons.sence1.com/promotions",
+                    type:"POST",
+                    contentType: "application/json",
+                    data:
+                    JSON.stringify({
+                        "promotion": {
+                        "service_id": 1,
+                        "name": promo_name,
+                        "discount": discount,
+                        "min_spend": min_spend,
+                        "max_spend": max_spend,
+                        "description": description,
+                        "start_date": start_date,
+                        "end_date": end_date,
+                        "category": category,
+                        "coupon_type": coupon_type,
+                        "prefix": prefix
+                    },
+                    "coupon_count": parseInt(coupon_count),
+
+                    })
+                    ,
+                    success: function(data,status){
+                    alert("Data: " + data + "\nStatus: " + status);
+                }
+                }
+                
+            
+            );
+            });
+
+// end create_promotions
+
+// start edit
+            $("#submit_edit").click(function(){
+                let promo_name = $("#promo_name_edit").val();
+                let discount = $("#discount_edit").val();
+                let min_spend = $("#min_spend_edit").val();
+                let max_spend = $("#max_spend_edit").val();
+                let description = $("#description_edit").val();
+                let category = $("#category_edit").val();
+                let coupon_type = $("#coupon_type_edit").val();
+                let prefix = $("#prefix_edit").val();
+                let edit_id = $("#id_edit").val();
+                let start_date = $("#start_date_edit").val();
+                let end_date = $("#end_date_edit").val();
+
+                $.ajax({
+                    url: `https://test.coupons.sence1.com/promotions/${edit_id}`, 
+                    type: 'PATCH',
+                    data:  {
+                        "promotion" : {
+                            "service_id": 1,
+                            "name": promo_name,
+                            "discount": discount,
+                            "min_spend": min_spend,
+                            "max_spend": max_spend,
+                            "description": description,
+                            "start_date": start_date,
+                            "end_date": end_date,
+                            "category": category,
+                            "coupon_type": coupon_type,
+                            "prefix": prefix
+                        }
+                    },
+                    success: function(data,status){
+                    alert("Data: " + data + "\nStatus: " + status);
+                }});
+            });
+// end edit
+
+//start create coupon code
+            $("#create_coupon_code_btn").click(function(){
+                let promo_id = $("#promotion_id_create_code").val();
+
+
+                $.ajax({
+                    url: `https://test.coupons.sence1.com/coupon_codes`, 
+                    type: 'POST',
+                    data:  {
+                            "promotion_id": promo_id
+                    },
+                    success: function(data,status){
+                        alert("Data: " + data + "\nStatus: " + status);
+                }});
+            });
+//end create coupon code
+
+//start DELETE Promotion
+$("#delete_single_promotion").click(function(){
+                let promo_id = $("#promotion_id_delete").val();
+
+
+                $.ajax({
+                    url: `https://test.coupons.sence1.com/promotions/${promo_id}`, 
+                    type: 'DELETE',
+                    // data:  {
+                    //         "promotion_id": promo_id
+                    // },
+                    success: function(data,status){
+                        alert("Data: " + data + "\nStatus: " + status);
+                }});
+            });
+//end DELETE promotion
+
+//start check coupon code
+            $("#check_coupon_code_btn").click(function(){
+                let code = $("#coupon_code_check_coupon_code").val();
+                let price = $("#spend_price_check_coupon_code").val();
+
+                $.ajax({
+                    url: `https://test.coupons.sence1.com/coupon_codes/check_coupon_code`, 
+                    type: 'POST',
+                    contentType: "application/json",
+                    data: JSON.stringify( {
+                            "code": code,
+                            "spend_price": parseInt(price)
+                    }
+                    ),
+                    success: function(data,status){
+                        populateCheckCouponCodeDetails(data);
+                }});
+            });
+//end check coupon code
+
+//start CLAIM coupon code
+$("#claim_coupon_code_btn").click(function(){
+                let code = $("#coupon_code_claim_coupon_code").val();
+                let price = $("#spend_price_claim_coupon_code").val();
+
+                $.ajax({
+                    url: `https://test.coupons.sence1.com/coupon_codes/redeem_code`, 
+                    type: 'POST',
+                    contentType: "application/json",
+                    data: JSON.stringify( {
+                            "code": code,
+                            "spend_price": parseInt(price)
+                    }
+                    ),
+                    success: function(data,status){
+                        alert(data);
+                        // populateCheckCouponCodeDetails(data);
+                }});
+            });
+//end CLAIM coupon code
+
+            function populateCheckCouponCodeDetails(coupon_code){
+                let promo_deets = populateDetails(coupon_code.promotion);
+                let code_deets = populateDetails(coupon_code.code);
+                // console.log(coupon_code.code)
+                $('.accordion-item-check_promo_details').remove();
+                $('.accordion-item-check_coupon_details').remove();
+
+
+                let promo_new_div = `<div class"check_promo_details">
+                ${promo_deets}    
+                </div>
+                `
+
+                let coupon_new_dev = `<div class="check_coupon_details">
+                ${code_deets}    
+                    
+                </div>`
+
+                $('#promo_details').append(promo_new_div);
+                $('#coupon_details').append(coupon_new_dev);
+            }
+
+
+//start get single promotions
+            $("#submit_single_promotion").click(function(){
+                var single_id = $("#promotion_id").val();
+
+                $.get(`https://test.coupons.sence1.com/promotions/${single_id}`,
+                function(data,status){
+                    $("#promotion_name").text(`Promotion Name: ${data.promotion.name}`);
+                    $("#promo_id").text(`Promotion ID: ${data.promotion.id}`);
+                    $('.accordion-item-promotion-coupons').remove();
+                    populatePromotion(data);
+                });
+            });
+//end get single promotions
+
+// start get all promotions
+            $("#get_promos").click(function(){
+                $.get("https://test.coupons.sence1.com/promotions",
+                function(data,status){
+                    $('.accordion-item-promotions').remove();
+                    data.forEach(populatePromotions);
+                });
+            });
+//end GET all promotions
+
+// start populate single promotion
+            function populatePromotion(item) {
+                let coupons = item.codes;
+                coupons.forEach(populateCoupons);
+            }
+// end populate single promotion
+
+
+            function populateCoupons(coupon) {
+                var newDiv = `<div class="accordion-item-promotion-coupons">
+                <h2 class="accordion-header" id="heading${coupon.id}">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${coupon.id}" aria-expanded="true" aria-controls="collapseOne">
+                        ${coupon.code}
+                    </button>
+                </h2>
+                <div id="collapse${coupon.id}" class="accordion-collapse collapse promo_class" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        ${populateDetails(coupon)}
+                    </div>
+                </div>
+                </div>`;
+
+                $('#single_promotion_coupon_data').append(newDiv);
+            }
+
+
+            function populateDetails(coupon){
+                let str = '';
+                Object.keys(coupon).forEach(function(key) {
+                    str += `${key}: ${coupon[key]}<br>`
+                });
+
+                return str;
+            }
+
+
+// start populate promotions
+            function populatePromotions(item) {
+                var newDiv = `<div class="accordion-item-promotions">
+                <h2 class="accordion-header" id="heading${item.id}">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapseOne">
+                        ${item.name}
+                    </button>
+                </h2>
+                <div id="collapse${item.id}" class="accordion-collapse collapse promo_class" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        ${populateDetails(item)}
+                      
+                    </div>
+                </div>
+                </div>`;
+
+                $('#promotions_data').append(newDiv);
+            }
+
+//end populate promotions container
+
+        });
+
+    </script>
+</body>
+</html>
